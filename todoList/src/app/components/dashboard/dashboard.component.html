@@ -1,0 +1,247 @@
+<div class="container-fluid bg-light">
+  <div class="conatiner bg-light">
+    <div class="row mt-4" style="height: 460px">
+      <div class="col"></div>
+      <div class="newCol md-2 bg-white shadow" id="to-do-ListField">
+        <div class="card mt-4">
+          <h4 class="ps-3 pt-2 pb-2">Add To-Do List</h4>
+        </div>
+        <br />
+        <div class="mb-2">
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Title</span>
+            <input
+              type="text"
+              class="form-control"
+              aria-describedby="basic-addon1"
+              name="title"
+              [(ngModel)]="addTitle"
+            />
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1"
+              >Work Category</span
+            >
+            <select
+              [(ngModel)]="selectedWorkCategory"
+              class="form-select"
+              aria-label="Default select example"
+              (change)="onChangeOption($event.target.value)"
+            >
+              <option selected></option>
+              <option value="Regular Work">Regular Work</option>
+              <option value="CR Work">CR Work</option>
+              <option value="Priority">Priority</option>
+              <option value="Most Priority">Most Priority</option>
+            </select>
+          </div>
+          <br />
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Description</span>
+            <textarea
+              class="form-control"
+              aria-describedby="basic-addon1"
+              name="description"
+              [(ngModel)]="addDescription"
+            ></textarea>
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Priority</span>
+          </div>
+          <div class="form-check form-check-inline">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              id="inlineCheckbox1"
+              name="priority"
+              value="Low"
+              (click)="selectCheckBox($event.target.value, $event.target.checked)"
+              [checked]="priorityCheck === 'Low'"
+            />
+            <label class="form-check-label" for="inlineCheckbox1">Low</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              id="inlineCheckbox2"
+              name="priority"
+              value="Medium"
+              (click)="selectCheckBox($event.target.value, $event.target.checked)"
+              [checked]="priorityCheck === 'Medium'"
+            />
+            <label class="form-check-label" for="inlineCheckbox2">Medium</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              id="inlineCheckbox3"
+              name="priority"
+              value="High"
+              (click)="selectCheckBox($event.target.value, $event.target.checked)"
+              [checked]="priorityCheck === 'High'"
+            />
+            <label class="form-check-label" for="inlineCheckbox3">High</label>
+          </div>
+        </div>
+        <button type="button" class="btn btn-primary" (click)="addTask()">
+          Add
+        </button>
+      </div>
+      <div class="col"></div>
+      <h4 class="mt-4">ToDo Lists</h4>
+      <div style="overflow-y: auto; height: 350px">
+        <div class="m-3 row" style="float: left; display: flex;" *ngFor="let task of taskArr">
+          <div class="p-2 shadow border" style="width: 300px">
+            <div class="input-group row ps-3 mb-3">
+              <div class="card col-md-10" style="font-weight: bold;">Title : {{ task.title }}</div>
+            </div>
+            <div class="input-group row ps-3 mb-3">
+              <div class="card col-md-10">
+                Daily Work : {{ task.workCategory }}
+              </div>
+            </div>
+            <div class="input-group row ps-3 mb-3">
+              <div class="card col-md-10">
+                Description : {{ task.description }}
+              </div>
+            </div>
+            <div class="input-group row ps-3 mb-3">
+              <div class="card col-md-10" style="font-weight: bold;">Priority : {{ task.priority }}</div>
+            </div>
+            <button
+              class="btn btn-primary me-2"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+              (click)="callEditTask(task)"
+            >
+              Edit
+            </button>
+            <button class="btn btn-danger" (click)="deleteTask(task)">
+              Delete
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Edit Task</h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+                (click)="removeData()"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <div class="p-2">
+                <div class="input-group row ps-3 mb-3">
+                  <div class="card col-md-4">Title :</div>
+                  <input
+                    type="text"
+                    class="form-control"
+                    aria-describedby="basic-addon1"
+                    name="title"
+                    [(ngModel)]="editTitle"
+                  />
+                </div>
+                <div class="input-group row ps-3 mb-3">
+                  <div class="card col-md-4">Daily Work :</div>
+                  <select
+                    [(ngModel)]="editSelectedWorkCategory"
+                    class="form-select"
+                    aria-label="Default select example"
+                    (change)="onChangeEditOption($event.target.value)"
+                  >
+                    <option selected></option>
+                    <option value="Regular Work">Regular Work</option>
+                    <option value="CR Work">CR Work</option>
+                    <option value="Priority">Priority</option>
+                    <option value="Most Priority">Most Priority</option>
+                  </select>
+                </div>
+                <div class="input-group row ps-3 mb-3">
+                  <div class="card col-md-4">Description :</div>
+                  <textarea
+                    class="form-control"
+                    aria-describedby="basic-addon1"
+                    name="description"
+                    [(ngModel)]="editDescription"
+                  ></textarea>
+                </div>
+                <div class="input-group row ps-3 mb-3">
+                  <div class="card col-md-4">Priority :</div>
+                  <div class="form-check form-check-inline col-md-2" style="margin-left: 5px;">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      id="inlineCheckbox1"
+                      name="priority"
+                      value="Low"
+                      (click)="selectEditCheckBox($event.target.value, $event.target.checked)"
+                      [checked]="editPriorityCheck === 'Low'"
+                    />
+                    <label class="form-check-label" for="inlineCheckbox1"
+                      >Low</label
+                    >
+                  </div>
+                  <div class="form-check form-check-inline col-md-2">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      id="inlineCheckbox2"
+                      name="priority"
+                      value="Medium"
+                      (click)="selectEditCheckBox($event.target.value, $event.target.checked)"
+                      [checked]="editPriorityCheck === 'Medium'"
+                    />
+                    <label class="form-check-label" for="inlineCheckbox2"
+                      >Medium</label
+                    >
+                  </div>
+                  <div class="form-check form-check-inline col-md-2">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      id="inlineCheckbox3"
+                      name="priority"
+                      value="High"
+                      (click)="selectEditCheckBox($event.target.value, $event.target.checked)"
+                      [checked]="editPriorityCheck === 'High'"
+                    />
+                    <label class="form-check-label" for="inlineCheckbox3"
+                      >High</label
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-primary"
+                data-bs-dismiss="modal"
+                (click)="editTask()"
+              >
+                Update
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<router-outlet></router-outlet>

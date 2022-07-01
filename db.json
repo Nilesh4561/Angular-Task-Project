@@ -1,0 +1,39 @@
+{
+  "task": [
+    {
+      "id": 1,
+      "title": "Task",
+      "workCategory": "Regular Work",
+      "description": "Provided Task",
+      "priority": "Low"
+    },
+    {
+      "id": 2,
+      "title": "New Task",
+      "workCategory": "CR Work",
+      "description": "new task for upcoming",
+      "priority": "Medium"
+    },
+    {
+      "id": 3,
+      "title": "Pending Task",
+      "workCategory": "Priority",
+      "description": "All pending group tasks",
+      "priority": "High"
+    },
+    {
+      "id": 4,
+      "title": "Upcoming Task",
+      "workCategory": "Most Priority",
+      "description": "latest coming task",
+      "priority": "High"
+    },
+    {
+      "id": 5,
+      "title": "Removed Task",
+      "workCategory": "Priority",
+      "description": "uncompleted task",
+      "priority": "Medium"
+    }
+  ]
+}

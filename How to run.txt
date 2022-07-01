@@ -1,0 +1,42 @@
+METHOD 1 : WITHOUT NODE MODULE
+step - 1:
+npm install json-server in workspace folder
+like : D:\Machine Test For Angular>npm install json-server
+it is as i have used json-server as a database to store all the values
+
+step - 2:
+run json-server --watch db.json in workspace folder
+if new file is created then remove all the code from the file and add
+{
+  "task": []
+}
+like : D:\Machine Test For Angular>json-server --watch db.json
+this will create and host a temporary database on the localhost
+
+step 3:
+run npm i on todoList folder
+like : D:\Machine Test For Angular\todoList>npm i
+
+step 4:
+run ng serve --open on todoList folder
+like : D:\Machine Test For Angular\todoList>ng serve --open
+
+METHOD 2 : run through apache tomcat
+
+i have shared a seprate folder with the build inside it
+extract the folder and place it in tomcat->webapps
+after that hit the url to access the build 
+like : http://192.168.0.105:4561/todoList/
+http://your ip address:apache tomcat port/todoList/
+
+this method will also require the json-server to run for fetching the data from localhost data base
+so perform step 1 and step 2
+
+METHOD 3 : RUN WITH NODULE MODULE
+step 1:
+run json-server --watch db.json in workspace folder
+like : D:\Machine Test For Angular>json-server --watch db.json
+
+step 2:
+run ng serve --open on todoList folder
+like : D:\Machine Test For Angular\todoList>ng serve --open

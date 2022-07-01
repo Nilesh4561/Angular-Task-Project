@@ -1,0 +1,7 @@
+export class Task {
+    id = 0;
+    title = '';
+    workCategory = '';
+    description = '';
+    priority = '';
+}

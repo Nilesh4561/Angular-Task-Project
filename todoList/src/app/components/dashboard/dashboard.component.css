@@ -1,0 +1,9 @@
+.newCol{
+    flex: none;
+}
+
+@media screen and (min-width: 820px) {
+    .newCol {
+        flex: 1 0 0%;
+    }
+  }
